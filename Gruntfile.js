@@ -53,6 +53,14 @@ module.exports = function(grunt) {
             }
         },
 
+        umd: {
+            dist: {
+                src: '<%= concat.dist.dest %>',
+                dest: '<%= concat.dist.dest %>',
+                indent: '    '
+            }
+        },
+
         uglify: {
             options: {
                 banner: '<%= banner %>'
@@ -81,7 +89,8 @@ module.exports = function(grunt) {
             src: {
                 files: 'src/*.js',
                 tasks: [
-                    'lint'
+                    'lint',
+                    'build'
                 ]
             }
         }
@@ -100,6 +109,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask( 'build', [
         'concat',
+        'umd',
         'uglify'
     ]);
 

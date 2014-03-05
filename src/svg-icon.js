@@ -1,6 +1,3 @@
-!function() {
-    'use strict';
+'use strict';
 
-    console.log( 'svg icon injector' );
-    console.log( 'yo' );
-}();
+console.log( 'svg icon injector' );
