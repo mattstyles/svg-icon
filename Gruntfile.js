@@ -1,24 +1,54 @@
-/*global module:false*/
 module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
         // Metadata.
         pkg: grunt.file.readJSON('package.json'),
-        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-                    '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                    '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-                    '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-                    ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+        banner: [
+            '/**',
+            ' * <%= pkg.name %> - v<%= pkg.version %>',
+            ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>',
+            ' * License <%= pkg.license.type %>',
+            ' */\n'
+        ].join('\n'),
 
         // Task configuration.
+        clean: {
+            tmp: [
+                '.jshint'
+            ]
+        },
+
+        jsonmin: {
+            jshint: {
+                options: {
+                    stripWhitespace : true,
+                    stripComments   : true
+                },
+                files: {
+                    '.jshint': '.jshintrc'
+                }
+            }
+        },
+
+        jshint: {
+            options: {
+                jshintrc: '.jshint'
+            },
+            src: [
+                'src/*.js'
+            ]
+        },
+
         concat: {
             options: {
                 banner: '<%= banner %>',
                 stripBanners: true
             },
             dist: {
-                src: ['lib/<%= pkg.name %>.js'],
+                src: [
+                    'src/*.js'
+                ],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -33,54 +63,54 @@ module.exports = function(grunt) {
             }
         },
 
-        jshint: {
+        bowercopy: {
             options: {
-                curly: true,
-                eqeqeq: true,
-                immed: true,
-                latedef: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                unused: true,
-                boss: true,
-                eqnull: true,
-                browser: true,
-                globals: {}
+                clean: true
             },
-            gruntfile: {
-                src: 'Gruntfile.js'
-            },
-            lib_test: {
-                src: ['lib/**/*.js', 'test/**/*.js']
+            examples: {
+                options: {
+                    destPrefix: 'examples/assets/vendor'
+                },
+                files: {
+                    'EventEmitter.min.js': 'eventEmitter/EventEmitter.min.js'
+                }
             }
         },
 
-        qunit: {
-            files: ['test/**/*.html']
-        },
-
         watch: {
-            gruntfile: {
-                files: '<%= jshint.gruntfile.src %>',
-                tasks: ['jshint:gruntfile']
-            },
-            lib_test: {
-                files: '<%= jshint.lib_test.src %>',
-                tasks: ['jshint:lib_test', 'qunit']
+            src: {
+                files: 'src/*.js',
+                tasks: [
+                    'lint'
+                ]
             }
         }
     });
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    // load all grunt tasks
+    require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
+    grunt.registerTask( 'lint', [
+        'jsonmin:jshint',
+        'jshint',
+        'clean:tmp'
+    ]);
+
+    grunt.registerTask( 'build', [
+        'concat',
+        'uglify'
+    ]);
+
+    grunt.registerTask( 'examples', [
+        'build',
+        'bowercopy:examples'
+    ]);
+
+    grunt.registerTask( 'default', [
+        'lint',
+        'build'
+    ]);
 
 };

@@ -1,23 +1,30 @@
 {
-    "name": "svg-icon",
-    "version": "0.0.0",
-    "author": [
-        "Matt Styles <matt@veryfizzyjelly.com>"
-    ],
-    "description": "Simple and lightweight mini-library making SVG in the DOM easy peasy",
-    "keywords": [
-        "SVG",
-        "HTML"
-    ],
-    "license": {
-       "type": "MIT",
-        "url": "https://github.com/mattstyles/SVG-icon#LICENSE"
-    },
-    "ignore": [
-        ".DS_Store",
-        "**/.*",
-        "node_modules",
-        "src/vendor",
-        "tests"
-    ]
+  "name": "svg-icon",
+  "version": "0.0.0",
+  "author": [
+    "Matt Styles <matt@veryfizzyjelly.com>"
+  ],
+  "description": "Simple and lightweight mini-library making SVG in the DOM easy peasy",
+  "keywords": [
+    "SVG",
+    "HTML"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/mattstyles/SVG-icon#LICENSE"
+  },
+  "ignore": [
+    ".DS_Store",
+    "**/.*",
+    "node_modules",
+    "src/vendor",
+    "tests",
+    "examples",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "eventEmitter": "~4.2.7"
+  }
 }
