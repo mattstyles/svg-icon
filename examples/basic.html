@@ -5,11 +5,16 @@
     <title>SVG-icon</title>
 </head>
 <body>
-    <img data-src="./assets/afro.min.js" alt="">
+    <img class="icon" data-src="./assets/afro.min.svg" alt="">
 
     <script src="./assets/vendor/lodash.min.js"></script>
     <script src="./assets/vendor/jquery.min.js"></script>
     <script src="./assets/vendor/EventEmitter.min.js"></script>
     <script src="../dist/SVG-icon.js"></script>
+    <script>
+        SVGIcon({
+            selfRegister: true
+        });
+    </script>
 </body>
 </html>

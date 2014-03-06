@@ -11,6 +11,7 @@ module.exports = function(grunt) {
             ' * License <%= pkg.license.type %>',
             ' */\n'
         ].join('\n'),
+        globalName: '<%= pkg.name.replace( /\-(.)/, function( m ) { return m.toUpperCase().replace( /\-/, "" ); } ) %>',
 
         // Task configuration.
         clean: {
@@ -59,7 +60,7 @@ module.exports = function(grunt) {
                 dest: '<%= concat.dist.dest %>',
                 indent: '    ',
                 objectToExport: 'exports',
-                globalAlias: '<%= pkg.name.replace( /\-/, "" ) %>',
+                globalAlias: '<%= globalName %>',
                 deps: {
                     'default': [ '_', '$' ],
                     amd: [ 'lodash', 'jquery' ],
