@@ -57,7 +57,14 @@ module.exports = function(grunt) {
             dist: {
                 src: '<%= concat.dist.dest %>',
                 dest: '<%= concat.dist.dest %>',
-                indent: '    '
+                indent: '    ',
+                objectToExport: 'exports',
+                globalAlias: '<%= pkg.name.replace( /\-/, "" ) %>',
+                deps: {
+                    'default': [ '_', '$' ],
+                    amd: [ 'lodash', 'jquery' ],
+                    cjs: [ 'lodash', 'jquery' ]
+                }
             }
         },
 
@@ -80,7 +87,9 @@ module.exports = function(grunt) {
                     destPrefix: 'examples/assets/vendor'
                 },
                 files: {
-                    'EventEmitter.min.js': 'eventEmitter/EventEmitter.min.js'
+                    'EventEmitter.min.js': 'eventEmitter/EventEmitter.min.js',
+                    'lodash.min.js': 'lodash/dist/lodash.min.js',
+                    'jquery.min.js': 'jquery/dist/jquery.min.js'
                 }
             }
         },

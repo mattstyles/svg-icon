@@ -40,9 +40,9 @@
     "plusplus"      : true,     // Prohibit use of `++` & `--`.
     "quotmark"      : "single", // Enforce the use of single quotation marks
     "regexp"        : true,     // Prohibit `.` and `[^...]` in regular expressions.
-    "undef"         : true,     // Require all non-global variables be declared before they are used.
-    "unused"        : true,     // Prohibits the use of defined but unused variables
-    "strict"        : true,     // Require `use strict` pragma in every file.
+    "undef"         : false,     // Require all non-global variables be declared before they are used.
+    "unused"        : false,     // Prohibits the use of defined but unused variables
+    "strict"        : false,     // Require `use strict` pragma in every file.
     "trailing"      : true,     // Prohibit trailing whitespaces.
 
     // == Relaxing Options ================================================
@@ -119,7 +119,7 @@
         //"iLoveDouglas"
     ],
     "globals": {
-        "angular": false
+        "root": true
     },
     "indent"        : 4         // Specify indentation spacing
 }

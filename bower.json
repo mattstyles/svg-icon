@@ -25,6 +25,8 @@
     "package.json"
   ],
   "dependencies": {
-    "eventEmitter": "~4.2.7"
+    "eventEmitter": "~4.2.7",
+    "lodash": "~2.4.1",
+    "jquery": "~2.1.0"
   }
 }
