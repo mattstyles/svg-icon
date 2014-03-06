@@ -67,7 +67,8 @@
         exports.selfRegister = typeof opts.selfRegister === 'undefined' ? true : opts.selfRegister;
     };
     
-    exports.VERSION = '0.0.1';
+    exports.VERSION = '0.0.2';
+    exports.selfRegister = true;
     
     exports.injectSVG = function( el, svg ) {
         el.outerHTML = svg;
