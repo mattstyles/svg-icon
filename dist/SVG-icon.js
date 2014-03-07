@@ -11,7 +11,7 @@
 }(this, function(_, $) {
 
     /**
-     * SVG-icon - v0.0.1
+     * SVG-icon - v0.0.2
      * Copyright (c) 2014 Matt Styles
      * License MIT
      */
@@ -64,80 +64,92 @@
     
     // Export public API
     var exports = function( opts ) {
-        exports.selfRegister = typeof opts.selfRegister === 'undefined' ? true : opts.selfRegister;
+        exports.setOptions( opts );
     };
     
-    exports.VERSION = '0.0.2';
-    exports.selfRegister = true;
+    _.extend( exports, (function() {
+        var options = {
+            selfRegister: true
+        };
     
-    exports.injectSVG = function( el, svg ) {
-        el.outerHTML = svg;
-    };
+        return {
+            VERSION: '0.1.0',
     
-    exports.inject = function() {
-        var els = document.querySelectorAll( '.icon' );
+            setOptions: function( opts ) {
+                _.extend( options, opts );
+            },
     
-        _.each( els, function( el ) {
-            // Bail
-            if ( !el.dataset.src ) {
-                console.error( 'No URL specified for icon' );
-                return;
-            }
+            injectSVG: function( el, svg ) {
+                el.outerHTML = svg;
+            },
     
-            // Check the cache
-            var cached = _.find( cache, function( item ) {
-                return item.id === el.dataset.src;
-            });
+            inject: function() {
+                if ( !options.selfRegister ) {
+                    return;
+                }
     
-            if ( cached ) {
-                console.log( 'loading icon from cache' );
-                exports.injectSVG( el, cached.content );
-                return;
-            }
+                console.log( 'SVGIcon self registered' );
     
-            // Load the icon
-            exports.ajax( el );
-        } );
-    };
+                var els = document.querySelectorAll( '.icon' );
     
-    exports.ajax = function( el ) {
-        var res = '';
+                _.each( els, _.bind( function( el ) {
+                    // Bail
+                    if ( !el.dataset.src ) {
+                        console.error( 'No URL specified for icon' );
+                        return;
+                    }
     
-        console.log( 'loading new icon' );
+                    // Check the cache
+                    var cached = _.find( cache, function( item ) {
+                        return item.id === el.dataset.src;
+                    });
     
-        req = new XMLHttpRequest();
-        req.open( 'GET', path + el.dataset.src, false );    // Do a dirty synchronous get
-        req.onload = function() {
-            if ( req.status === 200 ) {
-                iconClass = el.dataset.class || '';
-                res = req.response.replace( /\r?\n|\r/g, '' )
-                                  .replace( /<svg/, '<svg class="' + iconClass + '" ')
-                                  .match( /<svg(.*?)svg>/g );
+                    if ( cached ) {
+                        console.log( 'loading icon from cache' );
+                        this.injectSVG( el, cached.content );
+                        return;
+                    }
     
-                cache.push( {
-                    id: el.dataset.src,
-                    content: res
-                });
+                    // Load the icon
+                    this.ajax( el, this.injectSVG );
+                }, this ) );
+            },
     
-                exports.injectSVG( el, res );
+            ajax: function( el, cb ) {
+                var res = '';
+    
+                console.log( 'loading new icon' );
+    
+                req = new XMLHttpRequest();
+                req.open( 'GET', path + el.dataset.src, false );    // Do a dirty synchronous get
+                req.onload = function() {
+                    if ( req.status === 200 ) {
+                        iconClass = el.dataset.class || '';
+                        res = req.response.replace( /\r?\n|\r/g, '' )
+                                          .replace( /<svg/, '<svg class="' + iconClass + '" ')
+                                          .match( /<svg(.*?)svg>/g );
+    
+                        cache.push( {
+                            id: el.dataset.src,
+                            content: res
+                        });
+    
+                        cb( el, res );
+                    }
+                };
+                req.onerror = function( err ) {
+                    console.error( 'Error loading icon ' );
+                    console.error( err );
+                };
+                req.send();
             }
         };
-        req.onerror = function( err ) {
-            console.error( 'Error loading icon ' );
-            console.error( err );
-        };
-        req.send();
-    };
+    })() );
     
     
     
     // Self running module
     document.addEventListener( 'DOMContentLoaded', function( event ) {
-        if ( !exports.selfRegister ) {
-            return;
-        }
-    
-        console.log( 'SVGIcon self registered' );
         exports.inject();
     });
     
