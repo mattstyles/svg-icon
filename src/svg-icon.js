@@ -3,11 +3,6 @@
 var _ = _ || shim( 'lodash' ),
     $ = $ || shim( 'jquery' );
 
-
-var path = './',
-    req = null,
-    cache = [];
-
 // Export public API
 var exports = function( opts ) {
     exports.setOptions( opts );
@@ -16,7 +11,10 @@ var exports = function( opts ) {
 _.extend( exports, (function() {
     var options = {
         selfRegister: true
-    };
+    },
+
+        cache = [],
+        path = './';
 
     return {
         VERSION: '0.1.0',
@@ -26,7 +24,7 @@ _.extend( exports, (function() {
         },
 
         injectSVG: function( el, svg ) {
-            el.outerHTML = svg;
+            $( el ).replaceWith( svg );
         },
 
         inject: function() {
@@ -36,9 +34,11 @@ _.extend( exports, (function() {
 
             console.log( 'SVGIcon self registered' );
 
-            var els = document.querySelectorAll( '.icon' );
+            var els = $( '.icon' );
 
             _.each( els, function( el ) {
+                var self = this;
+
                 // Bail
                 if ( !el.dataset.src ) {
                     console.error( 'No URL specified for icon' );
@@ -46,6 +46,8 @@ _.extend( exports, (function() {
                 }
 
                 // Check the cache
+                // @todo grabbing the svg's is now async so this will invariably be incorrect
+                // as the cache wont have been populated before the next request comes in
                 var cached = _.find( cache, function( item ) {
                     return item.id === el.dataset.src;
                 });
@@ -57,37 +59,31 @@ _.extend( exports, (function() {
                 }
 
                 // Load the icon
-                this.ajax( el, this.injectSVG );
-            }, this );
-        },
+                $.ajax( {
+                    type: 'GET',
+                    url: el.dataset.src.match( /^http/ ) ? el.dataset.src : path + el.dataset.src,
+                    dataType: 'text'
+                })
+                    .done( function( data, status, xhr) {
+                        iconClass = el.dataset.class || '';
+                        res = data.replace( /\r?\n|\r/g, '' )
+                                  .replace( /<svg/, '<svg class="' + iconClass + '" ')
+                                  .match( /<svg(.*?)svg>/g )
+                                  .toString();
 
-        ajax: function( el, cb ) {
-            var res = '';
+                        cache.push( {
+                            id: el.dataset.src,
+                            content: res
+                        });
 
-            console.log( 'loading new icon' );
-
-            req = new XMLHttpRequest();
-            req.open( 'GET', path + el.dataset.src, false );    // Do a dirty synchronous get
-            req.onload = function() {
-                if ( req.status === 200 ) {
-                    iconClass = el.dataset.class || '';
-                    res = req.response.replace( /\r?\n|\r/g, '' )
-                                      .replace( /<svg/, '<svg class="' + iconClass + '" ')
-                                      .match( /<svg(.*?)svg>/g );
-
-                    cache.push( {
-                        id: el.dataset.src,
-                        content: res
+                        self.injectSVG( el, res );
+                    })
+                    .fail( function( xhr, status, err ) {
+                        console.log( 'xhr failed', status, err );
+                        console.log( 'Error loading icon', err );
                     });
 
-                    cb( el, res );
-                }
-            };
-            req.onerror = function( err ) {
-                console.error( 'Error loading icon ' );
-                console.error( err );
-            };
-            req.send();
+            }, this );
         }
     };
 })() );
