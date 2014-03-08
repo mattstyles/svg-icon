@@ -1,6 +1,7 @@
 
 
 function shim( dep ) {
+    var Arrayproto = Array.prototype;
 
     function jq() {
         var $ = function( selector ) {
@@ -16,8 +17,33 @@ function shim( dep ) {
 
     function lodash() {
         return {
-            find: function( args ) {
+            each: function( collection, cb, ctx) {
+                if ( Arrayproto.forEach ) {
+                    return Arrayproto.forEach.call( collection, cb, ctx );
+                }
 
+                var index = -1,
+                    len = collection.length;
+
+                while( ( index = index + 1 ) < len ) {
+                    if ( cb.call( ctx || null, collection[ index ] ) === false ) {
+                        break;
+                    }
+                }
+            },
+
+            extend: function( base ) {
+                this.each( Arrayproto.slice.call( arguments ), function( src ) {
+                    if ( src ) {
+                        for ( var prop in src ) {
+                            if ( src.hasOwnProperty( prop ) ) {
+                                base[ prop ] = src[ prop ];
+                            }
+                        }
+                    }
+                } );
+
+                return base;
             }
         };
     }

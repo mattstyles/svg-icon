@@ -38,7 +38,7 @@ _.extend( exports, (function() {
 
             var els = document.querySelectorAll( '.icon' );
 
-            _.each( els, _.bind( function( el ) {
+            _.each( els, function( el ) {
                 // Bail
                 if ( !el.dataset.src ) {
                     console.error( 'No URL specified for icon' );
@@ -58,7 +58,7 @@ _.extend( exports, (function() {
 
                 // Load the icon
                 this.ajax( el, this.injectSVG );
-            }, this ) );
+            }, this );
         },
 
         ajax: function( el, cb ) {
