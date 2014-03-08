@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG-icon</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <style>
+        body {
+            background: #FF1C23;
+            color: #A11300;
+        }
+        div {
+            position:absolute;
+            text-align:center;
+            left: 20%;
+            top: 40%;
+            width: 60%;
+
+        }
+        svg {
+            float:left;
+            width:30%;
+            height:30%;
+            margin: 10%;
+            fill: #A11300;
+
+            -webkit-transition: all 0.0777s linear;
+               -moz-transition: all 0.0777s linear;
+                -ms-transition: all 0.0777s linear;
+                    transition: all 0.0777s linear;
+        }
+        svg:hover {
+            -webkit-transform: scale( 1.2, 1.2 );
+               -moz-transform: scale( 1.2, 1.2 );
+                -ms-transform: scale( 1.2, 1.2 );
+                    transform: scale( 1.2, 1.2 );
+        }
+    </style>
+</head>
+<body>
+    <h1>SVG Icon</h1>
+    <h2>Cache</h2>
+    <div>
+        <img class="icon" data-src="./assets/afro.min.svg" alt="">
+        <img class="icon" data-src="./assets/afro.min.svg" alt="">
+    </div>
+
+    <script src="./assets/vendor/lodash.min.js"></script>
+    <script src="./assets/vendor/jquery.min.js"></script>
+    <script src="./assets/vendor/EventEmitter.min.js"></script>
+    <script src="../dist/SVG-icon.js"></script>
+</body>
+</html>

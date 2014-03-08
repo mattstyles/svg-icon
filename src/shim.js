@@ -44,6 +44,16 @@ function shim( dep ) {
                 } );
 
                 return base;
+            },
+
+            find: function( collection, cb ) {
+                this.each( collection, function( el ) {
+                    if ( cb( el ) === true ) {
+                        return el;
+                    }
+                });
+
+                return null;
             }
         };
     }
