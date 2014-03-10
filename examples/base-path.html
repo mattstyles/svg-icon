@@ -6,16 +6,16 @@
     <link rel="stylesheet" href="./assets/styles.css">
     <style>
         body {
-            background: #8BFFC8;
-            color: #467F64;
+            background: #7898ff;
+            color: #3C4C7F;
         }
         svg {
             position:absolute;
             width:30%;
             height:30%;
             left:35%;
-            top:35%;
-            fill: #467F64;
+            top:40%;
+            fill: #3C4C7F;
 
             -webkit-transition: all 0.1777s ease-in-out;
                -moz-transition: all 0.1777s ease-in-out;
@@ -32,8 +32,8 @@
 </head>
 <body>
     <h1>SVG Icon</h1>
-    <h2>Manual Loading</h2>
-    <img class="icon" data-src="./assets/afro.min.svg" alt="">
+    <h2>Base Path</h2>
+    <img class="icon" data-src="afro.min.svg" alt="">
 
     <script src="./assets/vendor/lodash.min.js"></script>
     <script src="./assets/vendor/jquery.min.js"></script>
@@ -42,7 +42,7 @@
 
     <script>
         SVGIcon({
-            selfRegister: false
+            basePath: './assets/'
         });
     </script>
 </body>

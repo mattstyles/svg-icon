@@ -10,11 +10,11 @@ var exports = function( opts ) {
 
 _.extend( exports, (function() {
     var options = {
-        selfRegister: true
+        selfRegister: true,
+        basePath: './'
     },
 
-        cache = [],
-        path = './';
+        cache = [];
 
     return {
         VERSION: '0.1.0',
@@ -61,7 +61,7 @@ _.extend( exports, (function() {
                 // Load the icon
                 $.ajax( {
                     type: 'GET',
-                    url: el.dataset.src.match( /^http/ ) ? el.dataset.src : path + el.dataset.src,
+                    url: el.dataset.src.match( /^http/ ) ? el.dataset.src : options.basePath + el.dataset.src,
                     dataType: 'text'
                 })
                     .done( function( data, status, xhr) {
