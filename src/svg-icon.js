@@ -1,5 +1,5 @@
 
-// @todo add shims for dependencies
+// Shim deps
 var _ = _ || shim( 'lodash' ),
     $ = $ || shim( 'jquery' );
 
@@ -61,7 +61,7 @@ _.extend( exports, (function() {
                 // Load the icon
                 $.ajax( {
                     type: 'GET',
-                    url: el.dataset.src.match( /^http/ ) ? el.dataset.src : options.basePath + el.dataset.src,
+                    url: el.dataset.src.match( /^http/ ) ? el.dataset.src : join( options.basePath, el.dataset.src ),
                     dataType: 'text'
                 })
                     .done( function( data, status, xhr) {
