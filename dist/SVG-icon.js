@@ -11,7 +11,7 @@
 }(this, function(_, $) {
 
     /**
-     * SVG-icon - v0.1.0
+     * SVG-icon - v0.2.0
      * Copyright (c) 2014 Matt Styles
      * License MIT
      */
@@ -176,7 +176,7 @@
             cache = [];
     
         return {
-            VERSION: '0.1.0',
+            VERSION: '0.2.0',
     
             setOptions: function( opts ) {
                 _.extend( options, opts );
