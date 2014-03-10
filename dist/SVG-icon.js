@@ -158,7 +158,7 @@
     }
     
     
-    // @todo add shims for dependencies
+    // Shim deps
     var _ = _ || shim( 'lodash' ),
         $ = $ || shim( 'jquery' );
     
@@ -169,11 +169,11 @@
     
     _.extend( exports, (function() {
         var options = {
-            selfRegister: true
+            selfRegister: true,
+            basePath: './'
         },
     
-            cache = [],
-            path = './';
+            cache = [];
     
         return {
             VERSION: '0.1.0',
@@ -220,7 +220,7 @@
                     // Load the icon
                     $.ajax( {
                         type: 'GET',
-                        url: el.dataset.src.match( /^http/ ) ? el.dataset.src : path + el.dataset.src,
+                        url: el.dataset.src.match( /^http/ ) ? el.dataset.src : join( options.basePath, el.dataset.src ),
                         dataType: 'text'
                     })
                         .done( function( data, status, xhr) {
@@ -253,6 +253,17 @@
     document.addEventListener( 'DOMContentLoaded', function( event ) {
         exports.inject();
     });
+    
+    // Quick dirty path normalizer
+    function join() {
+        var paths = Array.prototype.slice.call( arguments ),
+            joined = paths.join( '\\' );
+    
+        return joined.replace( /\\\//g, '/' )
+        .replace( /\/\\/g, '/' )
+        .replace( /\/\//g, '/' )
+        .replace( /\\/g, '/' );
+    }
     
 
     return exports;
