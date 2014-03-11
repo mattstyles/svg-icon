@@ -17,7 +17,7 @@ _.extend( exports, (function() {
         cache = [];
 
     return {
-        VERSION: '0.2.0',
+        VERSION: '0.2.1-SNAPSHOT',
 
         setOptions: function( opts ) {
             _.extend( options, opts );
@@ -25,6 +25,23 @@ _.extend( exports, (function() {
 
         injectSVG: function( el, svg ) {
             $( el ).replaceWith( svg );
+
+            // Fire an onload callback if one is specified
+            if ( el.dataset.onload ) {
+                var strip = el.dataset.onload.split( '.' ),
+                    section = strip.shift(),
+                    fn = window;
+                while ( section ) {
+                    console.log( section );
+                    if ( fn[ section ] ) {
+                        fn = fn[ section ];
+                    }
+                    section = strip.shift();
+                }
+                if ( typeof fn === 'function' ) {
+                    fn();
+                }
+            }
         },
 
         inject: function() {

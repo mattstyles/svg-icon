@@ -4,7 +4,7 @@ function join() {
         joined = paths.join( '\\' );
 
     return joined.replace( /\\\//g, '/' )
-    .replace( /\/\\/g, '/' )
-    .replace( /\/\//g, '/' )
-    .replace( /\\/g, '/' );
+                 .replace( /\/\\/g, '/' )
+                 .replace( /\/\//g, '/' )
+                 .replace( /\\/g, '/' );
 }
