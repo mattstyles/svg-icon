@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG-Icon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/vendor/normalize.css">
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <iframe id="view" src="./basic.html" frameborder="0"></iframe>
+        <div class="menu">
+        </div>
+    </div>
+    <nav>
+        <img class="icon" data-src="./assets/svg/menu.min.svg" data-class="icon-menu" data-onload="svgmenu.addTouchEvents">
+        <ul>
+            <li><i class="icon" data-src="./assets/svg/star.min.svg"></i><a href="#basic">Basic</a></li>
+            <li><i class="icon" data-src="./assets/svg/truck.min.svg"></i><a href="#standalone">Shim</a></li>
+            <li><i class="icon" data-src="./assets/svg/mustache.min.svg"></i><a href="#multiple">Multiple Icons</a></li>
+            <li><i class="icon" data-src="./assets/svg/lock.min.svg"></i><a href="#manual-load">Manual Load</a></li>
+            <li><i class="icon" data-src="./assets/svg/data.min.svg"></i><a href="#cache">Icon Caching</a></li>
+            <li><i class="icon" data-src="./assets/svg/meteo-compass.min.svg"></i><a href="#base-path">Base Path</a></li>
+        </ul>
+    </nav>
+
+    <script src="../dist/SVG-icon.js"></script>
+    <script src="./assets/menu.js"></script>
+    <script src="./assets/hashchange.js"></script>
+</body>
+</html>

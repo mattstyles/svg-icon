@@ -32,7 +32,6 @@ _.extend( exports, (function() {
                     section = strip.shift(),
                     fn = window;
                 while ( section ) {
-                    console.log( section );
                     if ( fn[ section ] ) {
                         fn = fn[ section ];
                     }
@@ -48,8 +47,6 @@ _.extend( exports, (function() {
             if ( !options.selfRegister ) {
                 return;
             }
-
-            console.log( 'SVGIcon self registered' );
 
             var els = $( '.icon' );
 

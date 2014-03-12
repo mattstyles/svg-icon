@@ -1,5 +1,10 @@
 # Release History
 
+## 0.2.1 /
+
+* Add data-onload html option
+* Add index for examples
+
 ## 0.2.0 / 10.03.14
 
 * Option - basePath and normalizer to handle paths

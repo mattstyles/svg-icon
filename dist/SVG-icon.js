@@ -11,7 +11,7 @@
 }(this, function(_, $) {
 
     /**
-     * SVG-icon - v0.2.0
+     * SVG-icon - v0.2.1-SNAPSHOT
      * Copyright (c) 2014 Matt Styles
      * License MIT
      */
@@ -176,7 +176,7 @@
             cache = [];
     
         return {
-            VERSION: '0.2.0',
+            VERSION: '0.2.1-SNAPSHOT',
     
             setOptions: function( opts ) {
                 _.extend( options, opts );
@@ -184,14 +184,28 @@
     
             injectSVG: function( el, svg ) {
                 $( el ).replaceWith( svg );
+    
+                // Fire an onload callback if one is specified
+                if ( el.dataset.onload ) {
+                    var strip = el.dataset.onload.split( '.' ),
+                        section = strip.shift(),
+                        fn = window;
+                    while ( section ) {
+                        if ( fn[ section ] ) {
+                            fn = fn[ section ];
+                        }
+                        section = strip.shift();
+                    }
+                    if ( typeof fn === 'function' ) {
+                        fn();
+                    }
+                }
             },
     
             inject: function() {
                 if ( !options.selfRegister ) {
                     return;
                 }
-    
-                console.log( 'SVGIcon self registered' );
     
                 var els = $( '.icon' );
     
@@ -260,9 +274,9 @@
             joined = paths.join( '\\' );
     
         return joined.replace( /\\\//g, '/' )
-        .replace( /\/\\/g, '/' )
-        .replace( /\/\//g, '/' )
-        .replace( /\\/g, '/' );
+                     .replace( /\/\\/g, '/' )
+                     .replace( /\/\//g, '/' )
+                     .replace( /\\/g, '/' );
     }
     
 

@@ -90,7 +90,8 @@ module.exports = function(grunt) {
                 files: {
                     'EventEmitter.min.js': 'eventEmitter/EventEmitter.min.js',
                     'lodash.min.js': 'lodash/dist/lodash.min.js',
-                    'jquery.min.js': 'jquery/dist/jquery.min.js'
+                    'jquery.min.js': 'jquery/dist/jquery.min.js',
+                    'normalize.css': 'normalize.css/normalize.css'
                 }
             }
         },
