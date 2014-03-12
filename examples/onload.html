@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG-icon</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <style>
+        body {
+            background: #FF7B21;
+            color: #B24A03;
+        }
+        svg {
+            position:absolute;
+            width:30%;
+            height:30%;
+            left:35%;
+            top:40%;
+            fill: #B24A03;
+
+            -webkit-transition: all 0.1777s ease-in-out;
+               -moz-transition: all 0.1777s ease-in-out;
+                -ms-transition: all 0.1777s ease-in-out;
+                    transition: all 0.1777s ease-in-out;
+        }
+        svg:hover {
+            -webkit-transform: scale( 1.2, 1.2 );
+               -moz-transform: scale( 1.2, 1.2 );
+                -ms-transform: scale( 1.2, 1.2 );
+                    transform: scale( 1.2, 1.2 );
+        }
+    </style>
+</head>
+<body>
+    <h1>SVG Icon</h1>
+    <h2>Firing Onload</h2>
+    <small>Check the console</small>
+    <img class="icon" data-src="./assets/svg/afro.min.svg" data-onload="svgi.sayHello">
+
+    <script src="./assets/vendor/lodash.min.js"></script>
+    <script src="./assets/vendor/jquery.min.js"></script>
+    <script src="./assets/vendor/EventEmitter.min.js"></script>
+    <script src="../dist/SVG-icon.js"></script>
+
+    <script>
+        var svgi = svgi || {
+            sayHello: function() {
+                console.log( 'Hello' );
+            }
+        };
+    </script>
+</body>
+</html>
