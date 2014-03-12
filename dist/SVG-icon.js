@@ -131,11 +131,14 @@
                 },
     
                 find: function( collection, cb ) {
-                    this.each( collection, function( el ) {
-                        if ( cb( el ) === true ) {
-                            return el;
+                    var index = -1,
+                        len = collection.length;
+    
+                    while( ( index = index + 1 ) < len ) {
+                        if ( cb.call( null, collection[ index ] ) === true ) {
+                            return collection[ index ];
                         }
-                    });
+                    }
     
                     return null;
                 }
@@ -149,6 +152,8 @@
                 console.log( 'Specified dependency for svg-icon not handled' );
             }
         };
+    
+        window._ = shims.lodash();
     
         if ( shims[ dep ] ) {
             return shims[ dep ]();
@@ -182,6 +187,18 @@
                 _.extend( options, opts );
             },
     
+            getCachedItem: function( el ) {
+                return _.find( cache, function( item ) {
+                    return item.id === el.dataset.src;
+                });
+            },
+    
+            injectCache: function( item ) {
+                _.each( item.elements, function( el ) {
+                    this.injectSVG( el, item.content );
+                }, this );
+            },
+    
             injectSVG: function( el, svg ) {
                 $( el ).replaceWith( svg );
     
@@ -203,6 +220,7 @@
             },
     
             inject: function() {
+                window.cache = cache;
                 if ( !options.selfRegister ) {
                     return;
                 }
@@ -219,37 +237,42 @@
                     }
     
                     // Check the cache
-                    // @todo grabbing the svg's is now async so this will invariably be incorrect
-                    // as the cache wont have been populated before the next request comes in
-                    var cached = _.find( cache, function( item ) {
-                        return item.id === el.dataset.src;
-                    });
+                    var cached = self.getCachedItem( el );
     
                     if ( cached ) {
-                        console.log( 'loading icon from cache' );
-                        this.injectSVG( el, cached.content );
+                        if ( cached.content ) {
+                            this.injectSVG( el, cached.content );
+                            return;
+                        }
+    
+                        cached.elements.push( el );
                         return;
                     }
     
                     // Load the icon
+                    if ( !cached ) {
+                        cache.push( {
+                            id: el.dataset.src,
+                            content: null,
+                            elements: [ el ]
+                        });
+                    }
                     $.ajax( {
                         type: 'GET',
                         url: el.dataset.src.match( /^http/ ) ? el.dataset.src : join( options.basePath, el.dataset.src ),
                         dataType: 'text'
                     })
                         .done( function( data, status, xhr) {
+                            var cached = null;
                             iconClass = el.dataset.class || '';
                             res = data.replace( /\r?\n|\r/g, '' )
                                       .replace( /<svg/, '<svg class="' + iconClass + '" ')
                                       .match( /<svg(.*?)svg>/g )
                                       .toString();
     
-                            cache.push( {
-                                id: el.dataset.src,
-                                content: res
-                            });
-    
-                            self.injectSVG( el, res );
+                            cached = self.getCachedItem( el );
+                            cached.content = res;
+                            self.injectCache( cached );
                         })
                         .fail( function( xhr, status, err ) {
                             console.log( 'xhr failed', status, err );
@@ -260,8 +283,6 @@
             }
         };
     })() );
-    
-    
     
     // Self running module
     document.addEventListener( 'DOMContentLoaded', function( event ) {

@@ -4,6 +4,7 @@
 
 * Add data-onload html option
 * Add index for examples
+* Add icon caching
 
 ## 0.2.0 / 10.03.14
 
