@@ -114,11 +114,14 @@ function shim( dep ) {
             },
 
             find: function( collection, cb ) {
-                this.each( collection, function( el ) {
-                    if ( cb( el ) === true ) {
-                        return el;
+                var index = -1,
+                    len = collection.length;
+
+                while( ( index = index + 1 ) < len ) {
+                    if ( cb.call( null, collection[ index ] ) === true ) {
+                        return collection[ index ];
                     }
-                });
+                }
 
                 return null;
             }
@@ -132,6 +135,8 @@ function shim( dep ) {
             console.log( 'Specified dependency for svg-icon not handled' );
         }
     };
+
+    window._ = shims.lodash();
 
     if ( shims[ dep ] ) {
         return shims[ dep ]();

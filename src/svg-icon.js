@@ -56,6 +56,7 @@ _.extend( exports, (function() {
         },
 
         inject: function() {
+            window.cache = cache;
             if ( !options.selfRegister ) {
                 return;
             }
