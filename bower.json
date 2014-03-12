@@ -1,6 +1,6 @@
 {
   "name": "svg-icon",
-  "version": "0.2.1-SNAPSHOT",
+  "version": "0.2.1",
   "main": "./dist/SVG-icon.min.js",
   "author": [
     "Matt Styles <matt@veryfizzyjelly.com>"
