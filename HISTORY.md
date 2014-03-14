@@ -1,6 +1,10 @@
 # Release History
 
-## 0.2.1 /
+## 0.2.2 / 
+
+* Add travis
+
+## 0.2.1 / 12.03.14
 
 * Add data-onload html option
 * Add index for examples

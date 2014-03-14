@@ -17,7 +17,7 @@ _.extend( exports, (function() {
         cache = [];
 
     return {
-        VERSION: '0.2.1',
+        VERSION: '0.2.2-snapshot',
 
         setOptions: function( opts ) {
             _.extend( options, opts );

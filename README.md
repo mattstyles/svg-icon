@@ -1,4 +1,4 @@
-# SVG-icon
+# SVG-icon [![Build Status](https://travis-ci.org/mattstyles/svg-icon.png?branch=master)](https://travis-ci.org/mattstyles/svg-icon)
 
 > Simple and lightweight mini-library making SVG in the DOM easy peasy
 
