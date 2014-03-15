@@ -57,9 +57,8 @@ _.extend( exports, (function() {
             }
         },
 
-        inject: function() {
-            window.cache = cache;
-            if ( !options.selfRegister ) {
+        inject: function( force ) {
+            if ( !options.selfRegister && !force ) {
                 return;
             }
 

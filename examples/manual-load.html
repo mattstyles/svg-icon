@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>SVG-icon</title>
     <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/vendor/normalize.css">
     <style>
         body {
             background: #8BFFC8;
@@ -28,12 +29,43 @@
                 -ms-transform: scale( 1.2, 1.2 );
                     transform: scale( 1.2, 1.2 );
         }
+
+        .btn {
+            position:absolute;
+            width: 30%;
+            left: 35%;
+            top: 60%;
+            display: inline-block;
+            padding: 14px 20px;
+            border: none;
+            outline: none;
+            background: #467F64;
+            color: #8BFFC8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 2em;
+            -webkit-transition: all 0.1777s ease-in-out;
+               -moz-transition: all 0.1777s ease-in-out;
+                -ms-transition: all 0.1777s ease-in-out;
+                    transition: all 0.1777s ease-in-out;
+        }
+        .btn:hover {
+            cursor:pointer;
+            background: #386550;
+        }
+        .btn:active {
+        }
+        .btn:focus {
+            outline: none;
+        }
+
     </style>
 </head>
 <body>
     <h1>SVG Icon</h1>
     <h2>Manual Loading</h2>
     <img class="icon" data-src="./assets/svg/afro.min.svg" alt="">
+    <button id="load" class="btn">Load</button>
 
     <script src="./assets/vendor/lodash.min.js"></script>
     <script src="./assets/vendor/jquery.min.js"></script>
@@ -43,6 +75,12 @@
     <script>
         SVGIcon({
             selfRegister: false
+        });
+    </script>
+    <script>
+        $( '#load' ).on( 'click', function() {
+            $( this ).css( 'display', 'none' );
+            SVGIcon.inject( true );
         });
     </script>
 </body>
