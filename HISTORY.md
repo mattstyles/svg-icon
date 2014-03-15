@@ -2,7 +2,8 @@
 
 ## 0.2.3 /
 
-
+* Update grunt examples task
+* Update tests to include multiple browsers
 
 ## 0.2.2 / 15.03.14
 

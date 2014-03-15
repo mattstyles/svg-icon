@@ -28,7 +28,7 @@ For a clearer picture either read the [code](https://github.com/mattstyles/svg-i
 
 ## How Does It Work
 
-SVG-Icon is designed to be as simple and unintrusive as possible.
+SVG-Icon is designed to be as simple and unobtrusive as possible.
 
 Take the following example of how to include an svg icon in your project:
 
@@ -73,7 +73,7 @@ The path to the svg to grab. If you’ve specified a `basePath` in the options t
 data-class="class-to-apply"
 ```
 
-When the SVG is loaded the tag is currently obliterated so if you want a class on the SVG tag you’ll have to specify it here. Yes, this is a pretty rubbish.
+When the SVG is loaded the tag is currently obliterated so if you want a class on the SVG tag you’ll have to specify it here. Yes, this is pretty rubbish.
 
 ### data-onload
 
@@ -81,7 +81,7 @@ When the SVG is loaded the tag is currently obliterated so if you want a class o
 data-onload="myLibrary.functionToRun"
 ```
 
-Want something to fire when the icon is loaded an included? Specify the function as a string here and SVG-Icon will try to find it and run it.
+Want something to fire when the icon is loaded? Specify the function as a string here and SVG-Icon will try to find it and run it.
 
 
 ## Options
@@ -96,7 +96,7 @@ SVGIcon({
 
 By default SVG-Icon will register and run itself and in most cases you’ll want your icons to be as immediately available as possible so just including the script in the page and having it run itself is convenient. However, should you need a little more control you can always stop it from self registering and handle loading those icons yourself.
 
-_Note:_ There is currently no easy way for manually load each icon, although calling SVGIcon.inject() will grab all of them.
+_Note:_ There is currently no easy way for manually load each icon, although calling SVGIcon.inject( true ) will grab all the icons.
 
 ### basePath
 
@@ -106,7 +106,7 @@ SVGIcon({
 });
 ```
 
-Specify a path to load icons from. All `data-src` attributes will now to relative to this `basePath`. SVGIcon is smart enough to normalize paths so don’t worry about including or omitting the trailing slash.
+Specify a path to load icons from. All `data-src` attributes will now be relative to this `basePath`. SVGIcon is smart enough to normalize paths so don’t worry about including or omitting the trailing slash.
 
 
 ## Examples
@@ -144,8 +144,16 @@ grunt watch
 
 ### To unit test your code
 
+Using PhantomJS (as Travis does):
+
 ```
 grunt karma:build
+```
+
+Using multiple browsers:
+
+```
+grunt karma:all
 ```
 
 For a reloading, watching variant using Chrome:

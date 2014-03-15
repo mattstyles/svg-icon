@@ -106,6 +106,17 @@ module.exports = function(grunt) {
             }
         },
 
+        connect: {
+            server: {
+                options: {
+                    port: 8016,
+                    keepalive:true,
+                    base: './',
+                    open: 'http://localhost:8016/examples/'
+                }
+            }
+        },
+
         karma: {
             options: {
                 configFile: 'test/karma.conf.js',
@@ -142,7 +153,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask( 'examples', [
         'build',
-        'bowercopy:examples'
+        'bowercopy:examples',
+        'connect'
     ]);
 
     grunt.registerTask( 'default', [
