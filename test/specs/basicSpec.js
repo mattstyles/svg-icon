@@ -1,5 +1,5 @@
 
-describe('Basic page inclusion test',function(){
+describe('SVGIcon basic functionality -',function(){
 
     beforeEach(function() {
 
@@ -10,7 +10,7 @@ describe('Basic page inclusion test',function(){
     });
 
 
-    describe( 'SVGIcon existence', function() {
+    describe( 'SVGIcon existence -', function() {
         it( 'expects \'exports\' to be defined', function() {
             expect( exports ).toBeDefined();
         });

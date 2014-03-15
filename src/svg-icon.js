@@ -21,6 +21,8 @@ _.extend( exports, (function() {
 
         setOptions: function( opts ) {
             _.extend( options, opts );
+
+            return options;
         },
 
         getCachedItem: function( el ) {
