@@ -114,6 +114,9 @@ module.exports = function(grunt) {
                 singleRun: true,
                 browsers: [ 'PhantomJS' ]
             },
+            all: {
+                singleRun: true
+            },
             dev: {
                 browsers: [ 'Chrome' ]
             }
