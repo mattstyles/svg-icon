@@ -1,8 +1,9 @@
 # Release History
 
-## 0.2.2 / 
+## 0.2.2 /
 
 * Add travis
+* Add karma and jasmine
 
 ## 0.2.1 / 12.03.14
 

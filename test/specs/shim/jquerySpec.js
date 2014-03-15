@@ -1,5 +1,5 @@
 
-describe( 'jquery shim test -', function(){
+describe( 'jquery shim tests -', function(){
     var div = utils.createElement( 'div', {
         id: 'foo',
         class: 'testClass'
