@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG-icon</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <style>
+        body {
+            background: #FFF52E;
+            color: #BAA218;
+        }
+        svg {
+            position:absolute;
+            width:30%;
+            height:30%;
+            left:35%;
+            top:40%;
+            fill: #BAA218;
+
+            -webkit-transition: all 0.1777s ease-in-out;
+               -moz-transition: all 0.1777s ease-in-out;
+                -ms-transition: all 0.1777s ease-in-out;
+                    transition: all 0.1777s ease-in-out;
+        }
+        svg:hover {
+            -webkit-transform: scale( 1.2, 1.2 );
+               -moz-transform: scale( 1.2, 1.2 );
+                -ms-transform: scale( 1.2, 1.2 );
+                    transform: scale( 1.2, 1.2 );
+        }
+
+        .rotate {
+            -webkit-transition: all 0.3333s linear;
+               -moz-transition: all 0.3333s linear;
+                -ms-transition: all 0.3333s linear;
+                    transition: all 0.3333s linear;
+        }
+        .rotate:hover {
+            -webkit-transform: rotate( 360deg );
+               -moz-transform: rotate( 360deg );
+                -ms-transform: rotate( 360deg );
+                    transform: rotate( 360deg );
+        }
+    </style>
+</head>
+<body>
+    <h1>SVG Icon</h1>
+    <h2>CSS Class</h2>
+    <img class="icon" data-src="./assets/svg/afro.min.svg" data-class="rotate">
+
+    <script src="./assets/vendor/lodash.min.js"></script>
+    <script src="./assets/vendor/jquery.min.js"></script>
+    <script src="./assets/vendor/EventEmitter.min.js"></script>
+    <script src="../dist/SVG-icon.js"></script>
+</body>
+</html>

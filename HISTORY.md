@@ -4,6 +4,8 @@
 
 * Add travis
 * Add karma and jasmine
+* Update readme to be useful for contributors
+* Add class example
 
 ## 0.2.1 / 12.03.14
 
