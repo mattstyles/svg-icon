@@ -15,7 +15,7 @@ describe( 'jquery shim tests -', function(){
     });
 
     afterEach( function() {
-        div.remove();
+        document.body.removeChild( div );
     });
 
 

@@ -11,7 +11,7 @@
 }(this, function(_, $) {
 
     /**
-     * SVG-icon - v0.2.1
+     * SVG-icon - v0.2.2-snapshot
      * Copyright (c) 2014 Matt Styles
      * License MIT
      */
@@ -153,8 +153,6 @@
             }
         };
     
-        window._ = shims.lodash();
-    
         if ( shims[ dep ] ) {
             return shims[ dep ]();
         } else {
@@ -181,10 +179,12 @@
             cache = [];
     
         return {
-            VERSION: '0.2.1',
+            VERSION: '0.2.2-snapshot',
     
             setOptions: function( opts ) {
                 _.extend( options, opts );
+    
+                return options;
             },
     
             getCachedItem: function( el ) {
@@ -219,9 +219,8 @@
                 }
             },
     
-            inject: function() {
-                window.cache = cache;
-                if ( !options.selfRegister ) {
+            inject: function( force ) {
+                if ( !options.selfRegister && !force ) {
                     return;
                 }
     

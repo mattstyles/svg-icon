@@ -1,11 +1,12 @@
 # Release History
 
-## 0.2.2 /
+## 0.2.2 / 15.03.14
 
 * Add travis
 * Add karma and jasmine
 * Update readme to be useful for contributors
 * Add class example
+* Update manual loading example
 
 ## 0.2.1 / 12.03.14
 
