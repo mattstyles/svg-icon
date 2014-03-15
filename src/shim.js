@@ -136,8 +136,6 @@ function shim( dep ) {
         }
     };
 
-    window._ = shims.lodash();
-
     if ( shims[ dep ] ) {
         return shims[ dep ]();
     } else {

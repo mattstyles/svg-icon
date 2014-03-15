@@ -104,6 +104,19 @@ module.exports = function(grunt) {
                     'build'
                 ]
             }
+        },
+
+        karma: {
+            options: {
+                configFile: 'test/karma.conf.js',
+            },
+            build: {
+                singleRun: true,
+                browsers: [ 'PhantomJS' ]
+            },
+            dev: {
+                browsers: [ 'Chrome' ]
+            }
         }
     });
 
