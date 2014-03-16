@@ -1,5 +1,4 @@
 .DS_Store
 src/vendor
 node_modules
-examples/assets/vendor
 
