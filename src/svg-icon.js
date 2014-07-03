@@ -101,7 +101,7 @@ _.extend( exports, (function() {
                 })
                     .done( function( data, status, xhr) {
                         var cached = null;
-                        iconClass = $( el ).attr( 'class' ) || '';
+                        iconClass = $( el ).data( 'class' ) || '';
                         res = data.replace( /\r?\n|\r/g, '' )
                                   .replace( /<svg/, '<svg class="' + iconClass + '" ')
                                   .match( /<svg(.*?)svg>/g )
