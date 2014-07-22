@@ -11,7 +11,7 @@
 }(this, function(_, $) {
 
     /**
-     * SVG-icon - v0.2.2-snapshot
+     * SVG-icon - v0.2.3
      * Copyright (c) 2014 Matt Styles
      * License MIT
      */
@@ -47,6 +47,10 @@
                 } );
     
                 return base;
+            };
+    
+            $.data = function( attrName ) {
+                return this.getAttribute( 'data-' + attrName );
             };
     
             $.replaceWith = function( newElement ) {
@@ -179,7 +183,7 @@
             cache = [];
     
         return {
-            VERSION: '0.2.2-snapshot',
+            VERSION: '0.2.3-snapshot',
     
             setOptions: function( opts ) {
                 _.extend( options, opts );
@@ -189,7 +193,7 @@
     
             getCachedItem: function( el ) {
                 return _.find( cache, function( item ) {
-                    return item.id === el.dataset.src;
+                    return item.id === $( el ).data( 'src' );
                 });
             },
     
@@ -203,8 +207,8 @@
                 $( el ).replaceWith( svg );
     
                 // Fire an onload callback if one is specified
-                if ( el.dataset.onload ) {
-                    var strip = el.dataset.onload.split( '.' ),
+                if ( $( el ).data( 'onload' ) ) {
+                    var strip = $( el ).data( 'onload' ).split( '.' ),
                         section = strip.shift(),
                         fn = window;
                     while ( section ) {
@@ -230,7 +234,7 @@
                     var self = this;
     
                     // Bail
-                    if ( !el.dataset.src ) {
+                    if ( !$( el ).data( 'src' ) ) {
                         console.error( 'No URL specified for icon' );
                         return;
                     }
@@ -251,19 +255,19 @@
                     // Load the icon
                     if ( !cached ) {
                         cache.push( {
-                            id: el.dataset.src,
+                            id: $( el ).data( 'src' ),
                             content: null,
                             elements: [ el ]
                         });
                     }
                     $.ajax( {
                         type: 'GET',
-                        url: el.dataset.src.match( /^http/ ) ? el.dataset.src : join( options.basePath, el.dataset.src ),
+                        url: $( el ).data( 'src' ).match( /^http/ ) ? $( el ).data( 'src' ) : join( options.basePath, $( el ).data( 'src' ) ),
                         dataType: 'text'
                     })
                         .done( function( data, status, xhr) {
                             var cached = null;
-                            iconClass = el.dataset.class || '';
+                            iconClass = $( el ).data( 'class' ) || '';
                             res = data.replace( /\r?\n|\r/g, '' )
                                       .replace( /<svg/, '<svg class="' + iconClass + '" ')
                                       .match( /<svg(.*?)svg>/g )
