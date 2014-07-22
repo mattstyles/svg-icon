@@ -1,7 +1,8 @@
 # Release History
 
-## 0.2.3 /
+## 0.2.3 / 22.07.14
 
+* Add data-set support for IE9 [adammartin1981]
 * Update grunt examples task
 * Update tests to include multiple browsers
 

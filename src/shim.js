@@ -32,6 +32,10 @@ function shim( dep ) {
             return base;
         };
 
+        $.data = function( attrName ) {
+            return this.getAttribute( 'data-' + attrName );
+        };
+
         $.replaceWith = function( newElement ) {
             var el = newElement;
 
