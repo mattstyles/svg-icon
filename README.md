@@ -96,7 +96,7 @@ SVGIcon({
 
 By default SVG-Icon will register and run itself and in most cases you’ll want your icons to be as immediately available as possible so just including the script in the page and having it run itself is convenient. However, should you need a little more control you can always stop it from self registering and handle loading those icons yourself.
 
-_Note:_ There is currently no easy way for manually load each icon, although calling SVGIcon.inject( true ) will grab all the icons.
+_Note:_ There is currently no easy way for manually loading each icon, although calling `SVGIcon.inject( true )` will grab all the icons.
 
 ### basePath
 
@@ -122,7 +122,7 @@ This will load all dependencies, build the code and fire up the examples index p
 
 ## Dependencies and Backwards Compatibility
 
-SVG-Icon provides a shim layer for both the [lodash](http://lodash.com/) and the [jquery](http://jquery.com/) functions that it uses but this shim layer is only tested against [evergreen browsers](http://tomdale.net/2013/05/evergreen-browsers/). If you want across-the-board compatibility then you’ll need to include and/or lodash/jquery, SVG-Icon will use them if they are available.
+SVG-Icon provides a shim layer for both the [lodash](http://lodash.com/) and the [jquery](http://jquery.com/) functions that it uses but this shim layer is only tested against [evergreen browsers](http://tomdale.net/2013/05/evergreen-browsers/). If you want across-the-board compatibility then you’ll need to include either/or lodash/jquery, SVG-Icon will use them if they are available.
 
 
 ## Contributing
@@ -171,5 +171,5 @@ Licensed under MIT.
 
 ---
 
-[@veryfizzyjelly](https://twitter.com/veryfizzyjelly)
+[@personalurban](https://twitter.com/personalurban)
 
